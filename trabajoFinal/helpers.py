@@ -10,7 +10,6 @@ def iqr(series:pd.Series) -> pd.Series:
     upper_lim =  q3 + 1.5 * iqr
     return series.apply(lambda value: (value > lower_lim) and (value < upper_lim))
 
-
 def grafico_base_rinde_variable(df:pd.DataFrame, columna:str, cultivo:str):
     df_grouped = df.groupby('Crop_Year')[['Yield', columna]].sum().reset_index()
 
