@@ -10,7 +10,7 @@ def iqr(series:pd.Series) -> pd.Series:
     upper_lim =  q3 + 1.5 * iqr
     return series.apply(lambda value: (value > lower_lim) and (value < upper_lim))
 
-def grafico_base_rinde_variable(df:pd.DataFrame, columna:str, cultivo:str):
+def rinde_por_columna(df:pd.DataFrame, columna:str, cultivo:str):
     df_grouped = df.groupby('Crop_Year')[['Yield', columna]].sum().reset_index()
 
     # Crear figura y ejes
@@ -34,7 +34,7 @@ def grafico_base_rinde_variable(df:pd.DataFrame, columna:str, cultivo:str):
     plt.tight_layout()
     plt.show()
 
-def grafico_interactivo_rinde_variable(df:pd.DataFrame, columna:str):
+def rinde_por_columna_interactivo(df:pd.DataFrame, columna:str, cultivo:str):
     df_grouped = df.groupby('Crop_Year')[['Yield', columna]].sum().reset_index()
 
     fig = go.Figure()
@@ -47,7 +47,7 @@ def grafico_interactivo_rinde_variable(df:pd.DataFrame, columna:str):
 
     # Configurar ejes
     fig.update_layout(
-        title=f"Evolución de Yield y {columna} por Crop Year",
+        title=f"Evolución de Yield y {columna} por Crop Year para {cultivo}",
         xaxis_title="Crop Year",
         yaxis=dict(title=columna),
         yaxis2=dict(title="Yield", overlaying='y', side='right'),
